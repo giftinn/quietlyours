@@ -421,20 +421,23 @@ function getDiff(start, timeZone){
 }
 
 function startTimer(){
-  const startDate = new Date("2026-02-15T00:00:00");
 
-  setInterval(()=>{
-    const jakarta = getDiff(startDate,"Asia/Jakarta");
-    const aus = getDiff(startDate,"Australia/Sydney");
+    const start = new Date("2025-02-10T00:00:00");
 
-    loveTimer.innerHTML = `
-      🇮🇩 ${jakarta.d}d ${jakarta.h}h ${jakarta.m}m ${jakarta.s}s<br>
-      🇦🇺 ${aus.d}d ${aus.h}h ${aus.m}m ${aus.s}s
-    `;
-  },1000);
+    setInterval(()=>{
+
+        const diff = new Date() - start;
+
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor(diff / 3600000) % 24;
+        const m = Math.floor(diff / 60000) % 60;
+        const s = Math.floor(diff / 1000) % 60;
+
+        document.getElementById("loveTimer").textContent =
+        `${d} days ${h}h ${m}m ${s}s`;
+
+    },1000);
 }
-
-startTimer();
 
 /* REVEAL */
 function revealMemory(el){
